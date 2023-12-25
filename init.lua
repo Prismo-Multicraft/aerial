@@ -73,24 +73,24 @@ aerial.register_wings = function(material,description,flammable,jump,flyspeed)
 	armor:register_armor(wingname,wing)
 
 	-- Register wing crafting recipe
-	local n = armor.materials[material]
-	minetest.register_craft({
-		output = wingname,
-		recipe = {
-			{n, "", n},
-			{n,  n, n},
-			{n, "", n}
-		},
-	})
+	-- local n = armor.materials[material]
+	-- minetest.register_craft({
+	-- 	output = wingname,
+	-- 	recipe = {
+	-- 		{n, "", n},
+	-- 		{n,  n, n},
+	-- 		{n, "", n}
+	-- 	},
+	-- })
 
 	-- Register wing as fuel if it's flammable
-	if flammable > 0 then
-		minetest.register_craft({
-			type = "fuel",
-			recipe = wingname,
-			burntime = 8,
-		})
-	end
+	-- if flammable > 0 then
+	-- 	minetest.register_craft({
+	-- 		type = "fuel",
+	-- 		recipe = wingname,
+	-- 		burntime = 8,
+	-- 	})
+	-- end
 
 	-- Register wing visual entity
 	minetest.register_entity(wingname, {
