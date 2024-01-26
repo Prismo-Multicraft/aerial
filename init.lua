@@ -270,7 +270,10 @@ Flight = {
 					flight.wing = nil
 
 					-- Revoke fly privilege
-					flight:revoke()
+					-- but check if player has player_fly priv
+					if not minetest.check_player_privs(player, {player_fly = true}) then
+						flight:revoke()
+					end
 
 					-- Remove fall damage protection
 					local groups = player:get_armor_groups()
