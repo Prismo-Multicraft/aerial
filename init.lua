@@ -323,6 +323,8 @@ Flight = {
 			-- Revoke fly privilege from player
 			revoke = function(flight)
 				local privs = minetest.get_player_privs(playername)
+				-- avoid changing privs of players with player_fly privs
+				if not privs.player_fly then return end
 				privs.fly = nil
 				minetest.set_player_privs(playername, privs)
 			end,
@@ -331,6 +333,9 @@ Flight = {
 			stamina = dependencies.stamina.enabled and dependencies.stamina.cost_per_second > 0 and {
 				stime = 0,
 				tick = function(self,flight,dtime)
+					-- if player has player_fly priv don't consume his stamina
+					if not minetest.check_player_privs(player, {player_fly = true}) then return end
+
 					-- Count time only if player is flying
 					if flight.state == Flight.FLYING then
 						self.stime = self.stime + dtime
