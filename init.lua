@@ -334,7 +334,7 @@ Flight = {
 				stime = 0,
 				tick = function(self,flight,dtime)
 					-- if player has player_fly priv don't consume his stamina
-					if not minetest.check_player_privs(player, {player_fly = true}) then return end
+					if minetest.check_player_privs(player, {player_fly = true}) then return end
 
 					-- Count time only if player is flying
 					if flight.state == Flight.FLYING then
